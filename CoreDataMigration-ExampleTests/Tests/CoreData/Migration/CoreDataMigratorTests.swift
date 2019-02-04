@@ -222,7 +222,7 @@ class CoreDataMigratorTests: XCTestCase {
     func test_requiresMigration_fromVersion1ToCurrent_true() {
         let storeURL = FileManager.moveFileFromBundleToTempDirectory(filename: "CoreDataMigration_Example_1.sqlite")
 
-        let requiresMigration = sut.requiresMigration(at: storeURL, toVersion: CoreDataMigrationVersion.latest)
+        let requiresMigration = sut.requiresMigration(at: storeURL, toVersion: CoreDataMigrationVersion.current)
 
         XCTAssertTrue(requiresMigration)
     }
