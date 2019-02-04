@@ -1,0 +1,12 @@
+language: objective-c
+
+cache:
+  - bundler
+
+osx_image: xcode10.1
+
+before_install:
+   - bundle install
+
+script:
+   - bundle exec fastlane run_unit_tests --verbose
