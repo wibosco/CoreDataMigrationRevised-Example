@@ -16,7 +16,11 @@ extension NSManagedObjectModel {
     static func managedObjectModel(forResource resource: String) -> NSManagedObjectModel {
         let mainBundle = Bundle.main
         let subdirectory = "CoreDataMigration_Example.momd"
-        let omoURL = mainBundle.url(forResource: resource, withExtension: "omo", subdirectory: subdirectory) // optimized model file
+        
+        var omoURL: URL?
+        if #available(iOS 11, *) {
+            omoURL = mainBundle.url(forResource: resource, withExtension: "omo", subdirectory: subdirectory) // optimized model file
+        }
         let momURL = mainBundle.url(forResource: resource, withExtension: "mom", subdirectory: subdirectory)
         
         guard let url = omoURL ?? momURL else {
