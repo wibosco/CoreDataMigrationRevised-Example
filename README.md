@@ -3,4 +3,4 @@
 <a href="https://twitter.com/wibosco"><img src="https://img.shields.io/badge/twitter-@wibosco-blue.svg?style=flat" alt="Twitter: @wibosco" /></a>
 
 # CoreDataMigration-Example
-An example project showing how we can implement progressive Core Data migrations as shown in this article - https://williamboles.me/progressive-core-data-migration/
+An example project showing how we can implement progressive Core Data migrations as shown in this article - https://williamboles.com/progressive-core-data-migration/
