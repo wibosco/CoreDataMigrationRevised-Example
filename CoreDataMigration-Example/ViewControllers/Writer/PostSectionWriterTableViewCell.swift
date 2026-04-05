@@ -14,7 +14,7 @@ struct PostSectionWriterTableViewCellViewModel {
     var body: String
 }
 
-protocol PostSectionWriterTableViewCellDelegate: class {
+protocol PostSectionWriterTableViewCellDelegate: AnyObject {
     
     func didSetTitle(cell: PostSectionWriterTableViewCell, to title: String)
     func didSetBody(cell: PostSectionWriterTableViewCell, to body: String)
