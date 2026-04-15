@@ -12,7 +12,6 @@ import CoreData
 @testable import CoreDataMigration_Example
 
 class CoreDataMigratorTests: XCTestCase {
-    
     var sut: CoreDataMigrator!
     
     // MARK: - Lifecycle
@@ -41,9 +40,9 @@ class CoreDataMigratorTests: XCTestCase {
     
     // MARK: - Tests
     
-    // MARK: SingleStepMigrations
+    // MARK: - SingleStepMigrations
     
-    func test_individualStepMigration_1to2() {
+    func test_givenVersion1Store_whenMigratedToVersion2_thenStoreIsCompatibleWithVersion2() {
         let sourceURL = FileManager.moveFileFromBundleToTempDirectory(filename: "CoreDataMigration_Example_1.sqlite")
         let toVersion = CoreDataMigrationVersion.version2
         
@@ -77,7 +76,7 @@ class CoreDataMigratorTests: XCTestCase {
         tearDownCoreDataStack(context: context)
     }
     
-    func test_individualStepMigration_2to3() {
+    func test_givenVersion2Store_whenMigratedToVersion3_thenStoreIsCompatibleWithVersion3() {
         let sourceURL = FileManager.moveFileFromBundleToTempDirectory(filename: "CoreDataMigration_Example_2.sqlite")
         let toVersion = CoreDataMigrationVersion.version3
 
@@ -132,7 +131,7 @@ class CoreDataMigratorTests: XCTestCase {
         tearDownCoreDataStack(context: context)
     }
 
-    func test_individualStepMigration_3to4() {
+    func test_givenVersion3Store_whenMigratedToVersion4_thenStoreIsCompatibleWithVersion4() {
         let sourceURL = FileManager.moveFileFromBundleToTempDirectory(filename: "CoreDataMigration_Example_3.sqlite")
         let toVersion = CoreDataMigrationVersion.version4
 
@@ -198,9 +197,9 @@ class CoreDataMigratorTests: XCTestCase {
         tearDownCoreDataStack(context: context)
     }
 
-    // MARK: MultipleStepMigrations
+    // MARK: - MultipleStepMigrations
 
-    func test_multipleStepMigration_fromVersion1toVersion4() {
+    func test_givenVersion1Store_whenMigratedToVersion4_thenStoreIsCompatibleWithVersion4() {
         let sourceURL = FileManager.moveFileFromBundleToTempDirectory(filename: "CoreDataMigration_Example_1.sqlite")
         let toVersion = CoreDataMigrationVersion.version4
 
@@ -225,9 +224,9 @@ class CoreDataMigratorTests: XCTestCase {
         tearDownCoreDataStack(context: context)
     }
 
-    // MARK: MigrationRequired
+    // MARK: - MigrationRequired
 
-    func test_requiresMigration_fromVersion1ToCurrent_true() {
+    func test_givenVersion1Store_whenCheckingIfRequiresMigrationToCurrent_thenReturnsTrue() {
         let storeURL = FileManager.moveFileFromBundleToTempDirectory(filename: "CoreDataMigration_Example_1.sqlite")
 
         let requiresMigration = sut.requiresMigration(at: storeURL,
@@ -236,7 +235,7 @@ class CoreDataMigratorTests: XCTestCase {
         XCTAssertTrue(requiresMigration)
     }
 
-    func test_requiresMigration_fromVersion2ToVersion2_false() {
+    func test_givenVersion2Store_whenCheckingIfRequiresMigrationToVersion2_thenReturnsFalse() {
         let storeURL = FileManager.moveFileFromBundleToTempDirectory(filename: "CoreDataMigration_Example_2.sqlite")
 
         let requiresMigration = sut.requiresMigration(at: storeURL,

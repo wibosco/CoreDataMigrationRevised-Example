@@ -10,8 +10,7 @@ import Foundation
 import CoreData
 
 class CoreDataManager {
-    
-    let migrator: CoreDataMigratorProtocol
+    let migrator: CoreDataMigrating
     private let storeType: String
     
     lazy var persistentContainer: NSPersistentContainer = {
@@ -44,7 +43,8 @@ class CoreDataManager {
     
     // MARK: - Init
     
-    init(storeType: String = NSSQLiteStoreType, migrator: CoreDataMigratorProtocol = CoreDataMigrator()) {
+    init(storeType: String = NSSQLiteStoreType,
+         migrator: CoreDataMigrating = CoreDataMigrator()) {
         self.storeType = storeType
         self.migrator = migrator
     }
@@ -63,7 +63,7 @@ class CoreDataManager {
         migrateStoreIfNeeded {
             self.persistentContainer.loadPersistentStores { description, error in
                 guard error == nil else {
-                    fatalError("was unable to load store \(error!)")
+                    fatalError("Unable to load store \(error!)")
                 }
                 
                 completion()
@@ -73,12 +73,14 @@ class CoreDataManager {
     
     private func migrateStoreIfNeeded(completion: @escaping () -> Void) {
         guard let storeURL = persistentContainer.persistentStoreDescriptions.first?.url else {
-            fatalError("persistentContainer was not set up properly")
+            fatalError("PersistentContainer was not set up properly")
         }
         
-        if migrator.requiresMigration(at: storeURL, toVersion: CoreDataMigrationVersion.current) {
+        if migrator.requiresMigration(at: storeURL,
+                                      toVersion: CoreDataMigrationVersion.current) {
             DispatchQueue.global(qos: .userInitiated).async {
-                self.migrator.migrateStore(at: storeURL, toVersion: CoreDataMigrationVersion.current)
+                self.migrator.migrateStore(at: storeURL,
+                                           toVersion: CoreDataMigrationVersion.current)
                 
                 DispatchQueue.main.async {
                     completion()

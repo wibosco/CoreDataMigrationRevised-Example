@@ -13,7 +13,8 @@ extension NSManagedObjectContext {
     
     // MARK: Model
     
-    convenience init(model: NSManagedObjectModel, storeURL: URL) {
+    convenience init(model: NSManagedObjectModel,
+                     storeURL: URL) {
         let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: model)
         try! persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType,
                                                            configurationName: nil,

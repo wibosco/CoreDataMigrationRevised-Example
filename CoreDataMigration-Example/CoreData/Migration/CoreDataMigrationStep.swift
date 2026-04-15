@@ -9,7 +9,6 @@
 import CoreData
 
 struct CoreDataMigrationStep {
-    
     let sourceModel: NSManagedObjectModel
     let destinationModel: NSManagedObjectModel
     let mappingModel: NSMappingModel

@@ -29,16 +29,17 @@
 		43370DBE1F66F0DF006188EC /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43370DBB1F66F0C0006188EC /* CoreDataManager.swift */; };
 		4345D4EE1F67E0FE00027D11 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4345D4ED1F67E0FE00027D11 /* UIColor+Hex.swift */; };
 		4345D4F01F67E10700027D11 /* UIColor+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4345D4EF1F67E10700027D11 /* UIColor+Random.swift */; };
+		43E924322F8FFB5500C932D2 /* CoreDataMigration_Example_1.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 43E9242A2F8FFB5500C932D2 /* CoreDataMigration_Example_1.sqlite */; };
+		43E924332F8FFB5500C932D2 /* CoreDataMigration_Example_3.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 43E9242C2F8FFB5500C932D2 /* CoreDataMigration_Example_3.sqlite */; };
+		43E924342F8FFB5500C932D2 /* CoreDataMigration_Example_2.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 43E9242B2F8FFB5500C932D2 /* CoreDataMigration_Example_2.sqlite */; };
+		43E924352F8FFB5500C932D2 /* CoreDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E9242F2F8FFB5500C932D2 /* CoreDataManagerTests.swift */; };
+		43E924372F8FFB5500C932D2 /* CoreDataMigratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E924302F8FFB5500C932D2 /* CoreDataMigratorTests.swift */; };
+		43E924392F8FFBC800C932D2 /* StubCoreDataMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E924382F8FFBC800C932D2 /* StubCoreDataMigrator.swift */; };
+		43E9243B2F8FFEA700C932D2 /* CoreDataMigrationVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E9243A2F8FFEA700C932D2 /* CoreDataMigrationVersionTests.swift */; };
 		C23BD45A21F08A350039A36B /* PostSectionViewerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BD45921F08A350039A36B /* PostSectionViewerTableViewCell.swift */; };
 		C28553DF21DCF5000004C7BA /* CoreDataMigrationVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28553DE21DCF5000004C7BA /* CoreDataMigrationVersion.swift */; };
 		C28553E221DD14090004C7BA /* NSManagedObjectModel+Compatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28553E121DD14090004C7BA /* NSManagedObjectModel+Compatible.swift */; };
 		C28553E421DD1D7B0004C7BA /* NSManagedObjectModel+Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28553E321DD1D7B0004C7BA /* NSManagedObjectModel+Resource.swift */; };
-		C28553F821DD21C40004C7BA /* CoreDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28553EE21DD21C30004C7BA /* CoreDataManagerTests.swift */; };
-		C28553FB21DD21C40004C7BA /* CoreDataMigration_Example_2.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = C28553F321DD21C30004C7BA /* CoreDataMigration_Example_2.sqlite */; };
-		C28553FD21DD21C40004C7BA /* CoreDataMigration_Example_1.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = C28553F521DD21C30004C7BA /* CoreDataMigration_Example_1.sqlite */; };
-		C28553FE21DD21C40004C7BA /* CoreDataMigration_Example_3.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = C28553F621DD21C30004C7BA /* CoreDataMigration_Example_3.sqlite */; };
-		C28553FF21DD21C40004C7BA /* CoreDataMigratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28553F721DD21C30004C7BA /* CoreDataMigratorTests.swift */; };
-		C285540221DD22040004C7BA /* MockCoreDataMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C285540121DD22040004C7BA /* MockCoreDataMigrator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,17 +82,18 @@
 		4345D4EF1F67E10700027D11 /* UIColor+Random.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Random.swift"; sourceTree = "<group>"; };
 		43AB8AE51F66E6A5003153B3 /* CoreDataMigration-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoreDataMigration-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		43AB8AFC1F66E6A5003153B3 /* CoreDataMigration-ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CoreDataMigration-ExampleTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		43E9242A2F8FFB5500C932D2 /* CoreDataMigration_Example_1.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = CoreDataMigration_Example_1.sqlite; sourceTree = "<group>"; };
+		43E9242B2F8FFB5500C932D2 /* CoreDataMigration_Example_2.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = CoreDataMigration_Example_2.sqlite; sourceTree = "<group>"; };
+		43E9242C2F8FFB5500C932D2 /* CoreDataMigration_Example_3.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = CoreDataMigration_Example_3.sqlite; sourceTree = "<group>"; };
+		43E9242F2F8FFB5500C932D2 /* CoreDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerTests.swift; sourceTree = "<group>"; };
+		43E924302F8FFB5500C932D2 /* CoreDataMigratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataMigratorTests.swift; sourceTree = "<group>"; };
+		43E924382F8FFBC800C932D2 /* StubCoreDataMigrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubCoreDataMigrator.swift; sourceTree = "<group>"; };
+		43E9243A2F8FFEA700C932D2 /* CoreDataMigrationVersionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataMigrationVersionTests.swift; sourceTree = "<group>"; };
 		C23BD45921F08A350039A36B /* PostSectionViewerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSectionViewerTableViewCell.swift; sourceTree = "<group>"; };
 		C28553DE21DCF5000004C7BA /* CoreDataMigrationVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataMigrationVersion.swift; sourceTree = "<group>"; };
 		C28553E121DD14090004C7BA /* NSManagedObjectModel+Compatible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectModel+Compatible.swift"; sourceTree = "<group>"; };
 		C28553E321DD1D7B0004C7BA /* NSManagedObjectModel+Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectModel+Resource.swift"; sourceTree = "<group>"; };
 		C28553E821DD21950004C7BA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C28553EE21DD21C30004C7BA /* CoreDataManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManagerTests.swift; sourceTree = "<group>"; };
-		C28553F321DD21C30004C7BA /* CoreDataMigration_Example_2.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = CoreDataMigration_Example_2.sqlite; sourceTree = "<group>"; };
-		C28553F521DD21C30004C7BA /* CoreDataMigration_Example_1.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = CoreDataMigration_Example_1.sqlite; sourceTree = "<group>"; };
-		C28553F621DD21C30004C7BA /* CoreDataMigration_Example_3.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = CoreDataMigration_Example_3.sqlite; sourceTree = "<group>"; };
-		C28553F721DD21C30004C7BA /* CoreDataMigratorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataMigratorTests.swift; sourceTree = "<group>"; };
-		C285540121DD22040004C7BA /* MockCoreDataMigrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCoreDataMigrator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -310,11 +312,49 @@
 		43AB8AFF1F66E6A5003153B3 /* CoreDataMigration-ExampleTests */ = {
 			isa = PBXGroup;
 			children = (
+				43E924292F8FFB5500C932D2 /* Doubles */,
+				43E9242E2F8FFB5500C932D2 /* Resources */,
+				43E924312F8FFB5500C932D2 /* Tests */,
 				3D2C746521DFFE5600514491 /* Helpers */,
 				C28553E521DD21950004C7BA /* Supporting Files */,
-				C28553EB21DD21C30004C7BA /* Tests */,
 			);
 			path = "CoreDataMigration-ExampleTests";
+			sourceTree = "<group>";
+		};
+		43E924292F8FFB5500C932D2 /* Doubles */ = {
+			isa = PBXGroup;
+			children = (
+				43E924382F8FFBC800C932D2 /* StubCoreDataMigrator.swift */,
+			);
+			path = Doubles;
+			sourceTree = "<group>";
+		};
+		43E9242D2F8FFB5500C932D2 /* SQLite */ = {
+			isa = PBXGroup;
+			children = (
+				43E9242A2F8FFB5500C932D2 /* CoreDataMigration_Example_1.sqlite */,
+				43E9242B2F8FFB5500C932D2 /* CoreDataMigration_Example_2.sqlite */,
+				43E9242C2F8FFB5500C932D2 /* CoreDataMigration_Example_3.sqlite */,
+			);
+			path = SQLite;
+			sourceTree = "<group>";
+		};
+		43E9242E2F8FFB5500C932D2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				43E9242D2F8FFB5500C932D2 /* SQLite */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		43E924312F8FFB5500C932D2 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				43E9242F2F8FFB5500C932D2 /* CoreDataManagerTests.swift */,
+				43E924302F8FFB5500C932D2 /* CoreDataMigratorTests.swift */,
+				43E9243A2F8FFEA700C932D2 /* CoreDataMigrationVersionTests.swift */,
+			);
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		C28553E021DD13EF0004C7BA /* NSManagedObjectModel */ = {
@@ -332,59 +372,6 @@
 				C28553E821DD21950004C7BA /* Info.plist */,
 			);
 			path = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		C28553EB21DD21C30004C7BA /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				C285540021DD21F50004C7BA /* Mocks */,
-				C28553EC21DD21C30004C7BA /* CoreData */,
-			);
-			path = Tests;
-			sourceTree = "<group>";
-		};
-		C28553EC21DD21C30004C7BA /* CoreData */ = {
-			isa = PBXGroup;
-			children = (
-				C28553ED21DD21C30004C7BA /* Manager */,
-				C28553EF21DD21C30004C7BA /* Migration */,
-			);
-			path = CoreData;
-			sourceTree = "<group>";
-		};
-		C28553ED21DD21C30004C7BA /* Manager */ = {
-			isa = PBXGroup;
-			children = (
-				C28553EE21DD21C30004C7BA /* CoreDataManagerTests.swift */,
-			);
-			path = Manager;
-			sourceTree = "<group>";
-		};
-		C28553EF21DD21C30004C7BA /* Migration */ = {
-			isa = PBXGroup;
-			children = (
-				C28553F721DD21C30004C7BA /* CoreDataMigratorTests.swift */,
-				C28553F121DD21C30004C7BA /* Models */,
-			);
-			path = Migration;
-			sourceTree = "<group>";
-		};
-		C28553F121DD21C30004C7BA /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				C28553F521DD21C30004C7BA /* CoreDataMigration_Example_1.sqlite */,
-				C28553F321DD21C30004C7BA /* CoreDataMigration_Example_2.sqlite */,
-				C28553F621DD21C30004C7BA /* CoreDataMigration_Example_3.sqlite */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		C285540021DD21F50004C7BA /* Mocks */ = {
-			isa = PBXGroup;
-			children = (
-				C285540121DD22040004C7BA /* MockCoreDataMigrator.swift */,
-			);
-			path = Mocks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -483,9 +470,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C28553FE21DD21C40004C7BA /* CoreDataMigration_Example_3.sqlite in Resources */,
-				C28553FB21DD21C40004C7BA /* CoreDataMigration_Example_2.sqlite in Resources */,
-				C28553FD21DD21C40004C7BA /* CoreDataMigration_Example_1.sqlite in Resources */,
+				43E924322F8FFB5500C932D2 /* CoreDataMigration_Example_1.sqlite in Resources */,
+				43E924332F8FFB5500C932D2 /* CoreDataMigration_Example_3.sqlite in Resources */,
+				43E924342F8FFB5500C932D2 /* CoreDataMigration_Example_2.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,11 +511,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C285540221DD22040004C7BA /* MockCoreDataMigrator.swift in Sources */,
 				3D8E52F721E0F98500FE1D35 /* NSManagedObjectContext+Helper.swift in Sources */,
-				C28553F821DD21C40004C7BA /* CoreDataManagerTests.swift in Sources */,
-				C28553FF21DD21C40004C7BA /* CoreDataMigratorTests.swift in Sources */,
+				43E924392F8FFBC800C932D2 /* StubCoreDataMigrator.swift in Sources */,
+				43E9243B2F8FFEA700C932D2 /* CoreDataMigrationVersionTests.swift in Sources */,
 				3D8E52F521E0EF2800FE1D35 /* FileManager+Helper.swift in Sources */,
+				43E924352F8FFB5500C932D2 /* CoreDataManagerTests.swift in Sources */,
+				43E924372F8FFB5500C932D2 /* CoreDataMigratorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
