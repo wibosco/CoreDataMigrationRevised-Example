@@ -15,7 +15,10 @@ extension NSManagedObjectContext {
     
     convenience init(model: NSManagedObjectModel, storeURL: URL) {
         let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: model)
-        try! persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: nil)
+        try! persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType,
+                                                           configurationName: nil,
+                                                           at: storeURL,
+                                                           options: nil)
         
         self.init(concurrencyType: .mainQueueConcurrencyType)
         
@@ -27,7 +30,9 @@ extension NSManagedObjectContext {
     func destroyStore() {
         persistentStoreCoordinator?.persistentStores.forEach {
             try? persistentStoreCoordinator?.remove($0)
-            try? persistentStoreCoordinator?.destroyPersistentStore(at: $0.url!, ofType: $0.type, options: nil)
+            try? persistentStoreCoordinator?.destroyPersistentStore(at: $0.url!,
+                                                                    ofType: $0.type,
+                                                                    options: nil)
         }
     }
 }

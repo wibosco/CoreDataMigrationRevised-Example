@@ -65,14 +65,17 @@ class PostsViewController: UITableViewController {
     
     // MARK: - UITableViewDataSource
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView,
+                            numberOfRowsInSection section: Int) -> Int {
         return posts.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView,
+                            cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let post = posts[indexPath.row]
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell", for: indexPath) as! PostTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PostTableViewCell",
+                                                 for: indexPath) as! PostTableViewCell
         
         let viewModel = cellViewModel(forPost: post)
         cell.configure(withViewModel: viewModel)
@@ -89,15 +92,20 @@ class PostsViewController: UITableViewController {
         let firstSection = typedSections.sorted { $0.index < $1.index }.first!
         let preview = firstSection.title!.count > 0 ? firstSection.title! : firstSection.body!
         
-        return PostTableViewCellViewModel(preview: preview, date: formattedDate, backgroundColor: backgroundColor)
+        return PostTableViewCellViewModel(preview: preview,
+                                          date: formattedDate,
+                                          backgroundColor: backgroundColor)
     }
     
     private func postViewerViewModel(forPost post: Post) -> PostViewerViewModel {
         let backgroundColor = UIColor.colorWithHex(hexColor: post.hexColor!) ?? UIColor.white
         let typedSections = post.sections as! Set<Section>
         
-        let sections = typedSections.sorted { $0.index < $1.index }.map { PostViewerSectionViewModel(title: $0.title!, body: $0.body!) }
+        let sections = typedSections.sorted { $0.index < $1.index }.map { PostViewerSectionViewModel(title: $0.title!,
+                                                                                                     body: $0.body!) }
         
-        return PostViewerViewModel(postID: post.postID!, sections: sections, backgroundColor: backgroundColor)
+        return PostViewerViewModel(postID: post.postID!,
+                                   sections: sections,
+                                   backgroundColor: backgroundColor)
     }
 }

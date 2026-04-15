@@ -20,13 +20,15 @@ class MockCoreDataMigrator: CoreDataMigratorProtocol {
     
     // MARK: - CoreDataMigratorProtocol
     
-    func requiresMigration(at: URL, toVersion: CoreDataMigrationVersion) -> Bool {
+    func requiresMigration(at: URL,
+                           toVersion: CoreDataMigrationVersion) -> Bool {
         requiresMigrationWasCalled = true
         
         return requiresMigrationToBeReturned
     }
     
-    func migrateStore(at storeURL: URL, toVersion version: CoreDataMigrationVersion) {
+    func migrateStore(at storeURL: URL,
+                      toVersion version: CoreDataMigrationVersion) {
         migrateStoreWasCalled = true
     }
 }

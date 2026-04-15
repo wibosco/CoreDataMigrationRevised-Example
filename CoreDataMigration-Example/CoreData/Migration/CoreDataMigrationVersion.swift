@@ -19,7 +19,7 @@ enum CoreDataMigrationVersion: String, CaseIterable {
     
     static var current: CoreDataMigrationVersion {
         guard let latest = allCases.last else {
-            fatalError("no model versions found")
+            fatalError("No model versions found")
         }
         
         return latest

@@ -16,8 +16,11 @@ struct PostSectionWriterTableViewCellViewModel {
 
 protocol PostSectionWriterTableViewCellDelegate: AnyObject {
     
-    func didSetTitle(cell: PostSectionWriterTableViewCell, to title: String)
-    func didSetBody(cell: PostSectionWriterTableViewCell, to body: String)
+    func didSetTitle(cell: PostSectionWriterTableViewCell,
+                     to title: String)
+    
+    func didSetBody(cell: PostSectionWriterTableViewCell,
+                    to body: String)
 }
 
 class PostSectionWriterTableViewCell: UITableViewCell, UITextFieldDelegate, UITextViewDelegate {
@@ -46,7 +49,8 @@ class PostSectionWriterTableViewCell: UITableViewCell, UITextFieldDelegate, UITe
     // MARK: - UITextFieldDelegate
     
     func textFieldDidEndEditing(_ textField: UITextField)  {
-        delegate?.didSetTitle(cell: self, to: textField.text ?? "")
+        delegate?.didSetTitle(cell: self,
+                              to: textField.text ?? "")
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -58,6 +62,7 @@ class PostSectionWriterTableViewCell: UITableViewCell, UITextFieldDelegate, UITe
     // MARK: - UITextViewDelegate
     
     func textViewDidEndEditing(_ textView: UITextView) {
-        delegate?.didSetBody(cell: self, to: textView.text ?? "")
+        delegate?.didSetBody(cell: self,
+                             to: textView.text ?? "")
     }
 }

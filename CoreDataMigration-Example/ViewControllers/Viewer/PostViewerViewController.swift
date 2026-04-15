@@ -50,14 +50,17 @@ class PostViewerViewController: UITableViewController {
     
     // MARK: - UITableViewDataSource
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView,
+                            numberOfRowsInSection section: Int) -> Int {
         return viewModel.sections.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView,
+                            cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let contentSectionViewModel = viewModel.sections[indexPath.row]
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PostSectionViewerTableViewCell", for: indexPath) as! PostSectionViewerTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PostSectionViewerTableViewCell",
+                                                 for: indexPath) as! PostSectionViewerTableViewCell
         
         cell.configure(withViewModel: contentSectionViewModel)
         

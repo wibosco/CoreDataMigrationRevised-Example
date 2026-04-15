@@ -22,7 +22,8 @@ class CoreDataManagerTests: XCTestCase {
         super.setUp()
     
         migrator = MockCoreDataMigrator()
-        sut = CoreDataManager(storeType: NSInMemoryStoreType, migrator: migrator)
+        sut = CoreDataManager(storeType: NSInMemoryStoreType,
+                              migrator: migrator)
     }
 
     override func tearDown() {

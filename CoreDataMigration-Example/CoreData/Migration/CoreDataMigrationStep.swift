@@ -16,11 +16,13 @@ struct CoreDataMigrationStep {
     
     // MARK: Init
     
-    init(sourceVersion: CoreDataMigrationVersion, destinationVersion: CoreDataMigrationVersion) {
+    init(sourceVersion: CoreDataMigrationVersion,
+         destinationVersion: CoreDataMigrationVersion) {
         let sourceModel = NSManagedObjectModel.managedObjectModel(forResource: sourceVersion.rawValue)
         let destinationModel = NSManagedObjectModel.managedObjectModel(forResource: destinationVersion.rawValue)
         
-        guard let mappingModel = CoreDataMigrationStep.mappingModel(fromSourceModel: sourceModel, toDestinationModel: destinationModel) else {
+        guard let mappingModel = CoreDataMigrationStep.mappingModel(from: sourceModel,
+                                                                    to: destinationModel) else {
             fatalError("Expected modal mapping not present")
         }
         
@@ -31,19 +33,21 @@ struct CoreDataMigrationStep {
     
     // MARK: - Mapping
     
-    private static func mappingModel(fromSourceModel sourceModel: NSManagedObjectModel, toDestinationModel destinationModel: NSManagedObjectModel) -> NSMappingModel? {
-        guard let customMapping = customMappingModel(fromSourceModel: sourceModel, toDestinationModel: destinationModel) else {
-            return inferredMappingModel(fromSourceModel:sourceModel, toDestinationModel: destinationModel)
-        }
-        
-        return customMapping
+    private static func mappingModel(from sourceModel: NSManagedObjectModel,
+                                     to destinationModel: NSManagedObjectModel) -> NSMappingModel? {
+        return customMappingModel(from: sourceModel, to: destinationModel) ?? inferredMappingModel(from:sourceModel, to: destinationModel)
     }
     
-    private static func inferredMappingModel(fromSourceModel sourceModel: NSManagedObjectModel, toDestinationModel destinationModel: NSManagedObjectModel) -> NSMappingModel? {
-        return try? NSMappingModel.inferredMappingModel(forSourceModel: sourceModel, destinationModel: destinationModel)
+    private static func inferredMappingModel(from sourceModel: NSManagedObjectModel,
+                                             to destinationModel: NSManagedObjectModel) -> NSMappingModel? {
+        return try? NSMappingModel.inferredMappingModel(forSourceModel: sourceModel,
+                                                        destinationModel: destinationModel)
     }
     
-    private static func customMappingModel(fromSourceModel sourceModel: NSManagedObjectModel, toDestinationModel destinationModel: NSManagedObjectModel) -> NSMappingModel? {
-        return NSMappingModel(from: [Bundle.main], forSourceModel: sourceModel, destinationModel: destinationModel)
+    private static func customMappingModel(from sourceModel: NSManagedObjectModel,
+                                           to destinationModel: NSManagedObjectModel) -> NSMappingModel? {
+        return NSMappingModel(from: [Bundle.main],
+                              forSourceModel: sourceModel,
+                              destinationModel: destinationModel)
     }
 }

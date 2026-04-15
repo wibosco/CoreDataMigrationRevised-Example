@@ -10,25 +10,36 @@ import CoreData
 
 final class Post2ToPost3MigrationPolicy: NSEntityMigrationPolicy {
     
-    override func createDestinationInstances(forSource sourceInstance: NSManagedObject, in mapping: NSEntityMapping, manager: NSMigrationManager) throws {
-        try super.createDestinationInstances(forSource: sourceInstance, in: mapping, manager: manager)
+    override func createDestinationInstances(forSource sourceInstance: NSManagedObject,
+                                             in mapping: NSEntityMapping,
+                                             manager: NSMigrationManager) throws {
+        try super.createDestinationInstances(forSource: sourceInstance,
+                                             in: mapping,
+                                             manager: manager)
 
-        guard let destinationPost = manager.destinationInstances(forEntityMappingName: mapping.name, sourceInstances: [sourceInstance]).first else {
-            fatalError("was expected a post")
+        guard let destinationPost = manager.destinationInstances(forEntityMappingName: mapping.name,
+                                                                 sourceInstances: [sourceInstance]).first else {
+            fatalError("Expected a post")
         }
         
         let sourceBody = sourceInstance.value(forKey: "content") as? String
         let sourceTitle = sourceBody?.prefix(4).appending("...")
         
-        let section = NSEntityDescription.insertNewObject(forEntityName: "Section", into: destinationPost.managedObjectContext!)
-        section.setValue(sourceTitle, forKey: "title")
-        section.setValue(sourceBody, forKey: "body")
-        section.setValue(destinationPost, forKey: "post")
-        section.setValue(0, forKey: "index")
+        let section = NSEntityDescription.insertNewObject(forEntityName: "Section",
+                                                          into: destinationPost.managedObjectContext!)
+        section.setValue(sourceTitle,
+                         forKey: "title")
+        section.setValue(sourceBody,
+                         forKey: "body")
+        section.setValue(destinationPost,
+                         forKey: "post")
+        section.setValue(0,
+                         forKey: "index")
         
         var sections = Set<NSManagedObject>()
         sections.insert(section)
 
-        destinationPost.setValue(sections, forKey: "sections")
+        destinationPost.setValue(sections,
+                                 forKey: "sections")
     }
 }

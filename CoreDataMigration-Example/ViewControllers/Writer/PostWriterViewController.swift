@@ -30,14 +30,17 @@ class PostWriterViewController: UITableViewController, PostSectionWriterTableVie
     
     // MARK: - UITableViewDataSource
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView,
+                            numberOfRowsInSection section: Int) -> Int {
         return contentSectionViewModels.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView,
+                            cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let contentSectionViewModel = contentSectionViewModels[indexPath.row]
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PostSectionTableViewCell", for: indexPath) as! PostSectionWriterTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PostSectionTableViewCell",
+                                                 for: indexPath) as! PostSectionWriterTableViewCell
         
         cell.configure(withViewModel: contentSectionViewModel)
         cell.delegate = self
@@ -53,7 +56,8 @@ class PostWriterViewController: UITableViewController, PostSectionWriterTableVie
         DispatchQueue.global(qos: .userInitiated).async {
             let context = CoreDataManager.shared.backgroundContext
             context.performAndWait {
-                let post = NSEntityDescription.insertNewObject(forEntityName: "Post", into: context) as! Post
+                let post = NSEntityDescription.insertNewObject(forEntityName: "Post",
+                                                               into: context) as! Post
                 post.postID = UUID().uuidString
                 post.date = Date()
                 post.hexColor = UIColor.randomPastelColor.hexString
@@ -63,7 +67,8 @@ class PostWriterViewController: UITableViewController, PostSectionWriterTableVie
                         continue
                     }
                     
-                    let section = NSEntityDescription.insertNewObject(forEntityName: "Section", into: context) as! Section
+                    let section = NSEntityDescription.insertNewObject(forEntityName: "Section",
+                                                                      into: context) as! Section
                     section.title = viewModel.title
                     section.body = viewModel.body
                     section.index = Int16(index)
@@ -77,7 +82,8 @@ class PostWriterViewController: UITableViewController, PostSectionWriterTableVie
                 }
                 
                 DispatchQueue.main.async {
-                    self.dismiss(animated: true, completion: nil)
+                    self.dismiss(animated: true,
+                                 completion: nil)
                 }
             }
         }
@@ -90,13 +96,15 @@ class PostWriterViewController: UITableViewController, PostSectionWriterTableVie
     }
     
     @IBAction func cancelButtonPressed(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true,
+                completion: nil)
     }
     
     // MARK: - Section
     
     func addNewSectionToTableView() {
-        let viewModel =  PostSectionWriterTableViewCellViewModel(title: "", body: "")
+        let viewModel = PostSectionWriterTableViewCellViewModel(title: "",
+                                                                body: "")
         contentSectionViewModels.append(viewModel)
         
         tableView.reloadData()
@@ -104,14 +112,18 @@ class PostWriterViewController: UITableViewController, PostSectionWriterTableVie
     
     func scrollToLastSection() {
         let lastIndex = (contentSectionViewModels.count - 1)
-        let lastIndexPath = IndexPath(item: lastIndex, section: 0)
+        let lastIndexPath = IndexPath(item: lastIndex,
+                                      section: 0)
         
-        tableView.scrollToRow(at: lastIndexPath, at: .bottom, animated: true)
+        tableView.scrollToRow(at: lastIndexPath,
+                              at: .bottom,
+                              animated: true)
     }
     
     // MARK: - PostSectionWriterTableViewCellDelegate
     
-    func didSetTitle(cell: PostSectionWriterTableViewCell, to title: String) {
+    func didSetTitle(cell: PostSectionWriterTableViewCell,
+                     to title: String) {
         guard let indexPath = tableView.indexPath(for: cell) else {
             return
         }
@@ -122,7 +134,8 @@ class PostWriterViewController: UITableViewController, PostSectionWriterTableVie
         contentSectionViewModels[indexPath.row] = viewModel
     }
     
-    func didSetBody(cell: PostSectionWriterTableViewCell, to body: String) {
+    func didSetBody(cell: PostSectionWriterTableViewCell,
+                    to body: String) {
         guard let indexPath = tableView.indexPath(for: cell) else {
             return
         }
