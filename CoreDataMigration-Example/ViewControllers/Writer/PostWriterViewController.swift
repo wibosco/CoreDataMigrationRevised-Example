@@ -12,6 +12,7 @@ import CoreData
 class PostWriterViewController: UITableViewController, PostSectionWriterTableViewCellDelegate {
     
     var contentSectionViewModels = [PostSectionWriterTableViewCellViewModel]()
+    var onDismiss: (() -> Void)?
     
     // MARK: - ViewLifecycle
     
@@ -83,7 +84,7 @@ class PostWriterViewController: UITableViewController, PostSectionWriterTableVie
                 
                 DispatchQueue.main.async {
                     self.dismiss(animated: true,
-                                 completion: nil)
+                                 completion: self.onDismiss)
                 }
             }
         }
@@ -97,7 +98,7 @@ class PostWriterViewController: UITableViewController, PostSectionWriterTableVie
     
     @IBAction func cancelButtonPressed(_ sender: Any) {
         dismiss(animated: true,
-                completion: nil)
+                completion: onDismiss)
     }
     
     // MARK: - Section

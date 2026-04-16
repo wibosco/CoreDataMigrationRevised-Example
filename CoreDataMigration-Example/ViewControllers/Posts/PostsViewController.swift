@@ -45,6 +45,11 @@ class PostsViewController: UITableViewController {
                 let viewModel = postViewerViewModel(forPost: post)
                 postViewCcontroller.configure(withViewModel: viewModel)
             }
+        } else if let navigationController = segue.destination as? UINavigationController,
+                  let writerController = navigationController.topViewController as? PostWriterViewController {
+            writerController.onDismiss = { [weak self] in
+                self?.loadData()
+            }
         }
     }
     
