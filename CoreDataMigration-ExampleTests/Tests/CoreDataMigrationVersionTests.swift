@@ -60,7 +60,7 @@ class CoreDataMigrationVersionTests: XCTestCase {
     
     // MARK: - Latest
 
-    func test_whenCurrentIsCalled_ThenVersion4IsReturned() {
-        XCTAssertEqual(CoreDataMigrationVersion.current, .version4)
+    func test_whenCurrentIsCalled_ThenVersion4IsReturned() throws {
+        XCTAssertEqual(try CoreDataMigrationVersion.current(), .version4)
     }
 }

@@ -36,6 +36,8 @@
 		43E924372F8FFB5500C932D2 /* CoreDataMigratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E924302F8FFB5500C932D2 /* CoreDataMigratorTests.swift */; };
 		43E924392F8FFBC800C932D2 /* StubCoreDataMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E924382F8FFBC800C932D2 /* StubCoreDataMigrator.swift */; };
 		43E9243B2F8FFEA700C932D2 /* CoreDataMigrationVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E9243A2F8FFEA700C932D2 /* CoreDataMigrationVersionTests.swift */; };
+		43E9243D2F902DF500C932D2 /* CoreDataMigrationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E9243C2F902DF500C932D2 /* CoreDataMigrationError.swift */; };
+		43E9243F2F9034B900C932D2 /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E9243E2F9034B900C932D2 /* CoreDataError.swift */; };
 		C23BD45A21F08A350039A36B /* PostSectionViewerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BD45921F08A350039A36B /* PostSectionViewerTableViewCell.swift */; };
 		C28553DF21DCF5000004C7BA /* CoreDataMigrationVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28553DE21DCF5000004C7BA /* CoreDataMigrationVersion.swift */; };
 		C28553E221DD14090004C7BA /* NSManagedObjectModel+Compatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28553E121DD14090004C7BA /* NSManagedObjectModel+Compatible.swift */; };
@@ -89,6 +91,8 @@
 		43E924302F8FFB5500C932D2 /* CoreDataMigratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataMigratorTests.swift; sourceTree = "<group>"; };
 		43E924382F8FFBC800C932D2 /* StubCoreDataMigrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubCoreDataMigrator.swift; sourceTree = "<group>"; };
 		43E9243A2F8FFEA700C932D2 /* CoreDataMigrationVersionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataMigrationVersionTests.swift; sourceTree = "<group>"; };
+		43E9243C2F902DF500C932D2 /* CoreDataMigrationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataMigrationError.swift; sourceTree = "<group>"; };
+		43E9243E2F9034B900C932D2 /* CoreDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
 		C23BD45921F08A350039A36B /* PostSectionViewerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSectionViewerTableViewCell.swift; sourceTree = "<group>"; };
 		C28553DE21DCF5000004C7BA /* CoreDataMigrationVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataMigrationVersion.swift; sourceTree = "<group>"; };
 		C28553E121DD14090004C7BA /* NSManagedObjectModel+Compatible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectModel+Compatible.swift"; sourceTree = "<group>"; };
@@ -156,6 +160,7 @@
 				C28553DE21DCF5000004C7BA /* CoreDataMigrationVersion.swift */,
 				431DCEB21F67EE2600CF6316 /* CoreDataMigrator.swift */,
 				431DCEB31F67EE2600CF6316 /* Mappings */,
+				43E9243C2F902DF500C932D2 /* CoreDataMigrationError.swift */,
 				431DCED01F68156B00CF6316 /* Policies */,
 			);
 			path = Migration;
@@ -246,6 +251,7 @@
 				43370DBB1F66F0C0006188EC /* CoreDataManager.swift */,
 				431DCEAF1F67EE2600CF6316 /* Migration */,
 				43370DB91F66F0C0006188EC /* Model */,
+				43E9243E2F9034B900C932D2 /* CoreDataError.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -484,6 +490,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				43370DB01F66E7A6006188EC /* AppDelegate.swift in Sources */,
+				43E9243F2F9034B900C932D2 /* CoreDataError.swift in Sources */,
 				431DCEC01F67F18100CF6316 /* CoreDataMigrator.swift in Sources */,
 				C28553E421DD1D7B0004C7BA /* NSManagedObjectModel+Resource.swift in Sources */,
 				431DCECB1F67F93000CF6316 /* AppLoadingViewController.swift in Sources */,
@@ -496,6 +503,7 @@
 				4345D4F01F67E10700027D11 /* UIColor+Random.swift in Sources */,
 				4345D4EE1F67E0FE00027D11 /* UIColor+Hex.swift in Sources */,
 				431DCED21F6815A300CF6316 /* Post2ToPost3MigrationPolicy.swift in Sources */,
+				43E9243D2F902DF500C932D2 /* CoreDataMigrationError.swift in Sources */,
 				431DCECD1F67FE0800CF6316 /* PostTableViewCell.swift in Sources */,
 				431DCECC1F67FE0500CF6316 /* PostsViewController.swift in Sources */,
 				43370DBE1F66F0DF006188EC /* CoreDataManager.swift in Sources */,

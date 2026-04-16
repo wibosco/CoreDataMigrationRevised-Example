@@ -22,10 +22,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
         }
         
-        CoreDataManager.shared.setup {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { // just for example purposes
-                self.presentMainUI()
+        CoreDataManager.shared.setup { result in
+            guard case let .failure(error) = result else {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { // just for example purposes
+                    self.presentMainUI()
+                }
+                
+                return
             }
+            
+            fatalError("Unable to set up Core Data stack: \(error)")
         }
         
         return true

@@ -15,6 +15,7 @@ extension NSManagedObjectModel {
     
     static func compatibleModelForStoreMetadata(_ metadata: [String : Any]) -> NSManagedObjectModel? {
         let mainBundle = Bundle.main
-        return NSManagedObjectModel.mergedModel(from: [mainBundle], forStoreMetadata: metadata)
+        return NSManagedObjectModel.mergedModel(from: [mainBundle],
+                                                forStoreMetadata: metadata)
     }
 }

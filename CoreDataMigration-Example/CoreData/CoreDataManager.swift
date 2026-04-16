@@ -51,43 +51,73 @@ class CoreDataManager {
     
     // MARK: - SetUp
     
-    func setup(completion: @escaping () -> Void) {
-        loadPersistentStore {
-            completion()
+    func setup(completion: @escaping (Result<Void, Error>) -> Void) {
+        loadPersistentStore { result in
+            completion(result)
         }
     }
     
     // MARK: - Loading
     
-    private func loadPersistentStore(completion: @escaping () -> Void) {
-        migrateStoreIfNeeded {
-            self.persistentContainer.loadPersistentStores { description, error in
-                guard error == nil else {
-                    fatalError("Unable to load store \(error!)")
+    private func loadPersistentStore(completion: @escaping (Result<Void, Error>) -> Void) {
+        migrateStoreIfNeeded { result in
+            guard case .success = result else {
+                completion(result)
+                return
+            }
+            
+            self.persistentContainer.loadPersistentStores { _, error in
+                guard let error = error else {
+                    completion(.success(Void()))
+                    return
                 }
                 
-                completion()
+                completion(.failure(CoreDataError.persistentStoreLoadFailed(error)))
             }
         }
     }
     
-    private func migrateStoreIfNeeded(completion: @escaping () -> Void) {
+    private func migrateStoreIfNeeded(completion: @escaping (Result<Void, Error>) -> Void) {
         guard let storeURL = persistentContainer.persistentStoreDescriptions.first?.url else {
-            fatalError("PersistentContainer was not set up properly")
+            completion(.failure(CoreDataError.persistentContainerNotSetup))
+            return
         }
         
-        if migrator.requiresMigration(at: storeURL,
-                                      toVersion: CoreDataMigrationVersion.current) {
-            DispatchQueue.global(qos: .userInitiated).async {
-                self.migrator.migrateStore(at: storeURL,
-                                           toVersion: CoreDataMigrationVersion.current)
-                
-                DispatchQueue.main.async {
-                    completion()
-                }
+        do {
+            let currentVersion = try CoreDataMigrationVersion.current()
+            let requiresMigration = try migrator.requiresMigration(at: storeURL,
+                                                                   toVersion: currentVersion)
+            
+            guard requiresMigration else {
+                completion(.success(Void()))
+                return
             }
-        } else {
-            completion()
+            
+            migrateStore(storeURL: storeURL,
+                         toVersion: currentVersion,
+                         completion: completion)
+        } catch {
+            completion(.failure(error))
+        }
+    }
+    
+    private func migrateStore(storeURL: URL,
+                              toVersion version: CoreDataMigrationVersion,
+                              completion: @escaping (Result<Void, Error>) -> Void) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            do {
+                try self.migrator.migrateStore(at: storeURL,
+                                               toVersion: version)
+            } catch {
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
+                return
+            }
+            
+            DispatchQueue.main.async {
+                completion(.success(Void()))
+            }
         }
     }
 }

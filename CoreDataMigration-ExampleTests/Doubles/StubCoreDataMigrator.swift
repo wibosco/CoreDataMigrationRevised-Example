@@ -20,17 +20,27 @@ class StubCoreDataMigrator: CoreDataMigrating {
     private(set) var events: [Event] = []
     
     var requiresMigrationToBeReturned: Bool!
+    var requiresMigrationErrorToBeThrown: Error?
+    var migrateStoreErrorToBeThrown: Error?
     
     func requiresMigration(at storeURL: URL,
-                           toVersion version: CoreDataMigrationVersion) -> Bool {
+                           toVersion version: CoreDataMigrationVersion) throws -> Bool {
         events.append(.requiresMigration(storeURL, version))
+        
+        if let error = requiresMigrationErrorToBeThrown {
+            throw error
+        }
         
         return requiresMigrationToBeReturned
     }
     
     func migrateStore(at storeURL: URL,
-                      toVersion version: CoreDataMigrationVersion) {
+                      toVersion version: CoreDataMigrationVersion) throws {
         events.append(.migrateStore(storeURL, version))
+        
+        if let error = migrateStoreErrorToBeThrown {
+            throw error
+        }
     }
 }
 

@@ -9,8 +9,8 @@
 import CoreData
 
 protocol CoreDataMigrating {
-    func requiresMigration(at storeURL: URL, toVersion version: CoreDataMigrationVersion) -> Bool
-    func migrateStore(at storeURL: URL, toVersion version: CoreDataMigrationVersion)
+    func requiresMigration(at storeURL: URL, toVersion version: CoreDataMigrationVersion) throws -> Bool
+    func migrateStore(at storeURL: URL, toVersion version: CoreDataMigrationVersion) throws
 }
 
 class CoreDataMigrator: CoreDataMigrating {
@@ -18,23 +18,24 @@ class CoreDataMigrator: CoreDataMigrating {
     // MARK: - Check
     
     func requiresMigration(at storeURL: URL,
-                           toVersion version: CoreDataMigrationVersion) -> Bool {
-        guard let metadata = NSPersistentStoreCoordinator.metadata(at: storeURL) else {
+                           toVersion version: CoreDataMigrationVersion) throws -> Bool {
+        guard let metadata = try? NSPersistentStoreCoordinator.metadata(at: storeURL) else {
             return false
         }
+        let compatiableVersion = try CoreDataMigrationVersion.compatibleVersionForStoreMetadata(metadata)
         
-        return (CoreDataMigrationVersion.compatibleVersionForStoreMetadata(metadata) != version)
+        return compatiableVersion != version
     }
     
     // MARK: - Migration
     
     func migrateStore(at storeURL: URL,
-                      toVersion version: CoreDataMigrationVersion) {
-        forceWALCheckpointingForStore(at: storeURL)
+                      toVersion version: CoreDataMigrationVersion) throws {
+        try forceWALCheckpointingForStore(at: storeURL)
         
         var currentURL = storeURL
-        let migrationSteps = self.migrationStepsForStore(at: storeURL,
-                                                         toVersion: version)
+        let migrationSteps = try self.migrationStepsForStore(at: storeURL,
+                                                             toVersion: version)
         
         for migrationStep in migrationSteps {
             let manager = NSMigrationManager(sourceModel: migrationStep.sourceModel,
@@ -52,44 +53,42 @@ class CoreDataMigrator: CoreDataMigrating {
                                          destinationType: NSSQLiteStoreType,
                                          destinationOptions: nil)
             } catch let error {
-                fatalError("Failed attempting to migrate from \(migrationStep.sourceModel) to \(migrationStep.destinationModel), error: \(error)")
+                throw CoreDataMigrationError.migrationFailed(error)
             }
             
             if currentURL != storeURL {
                 //Destroy intermediate step's store
-                NSPersistentStoreCoordinator.destroyStore(at: currentURL)
+                try NSPersistentStoreCoordinator.destroyStore(at: currentURL)
             }
             
             currentURL = destinationURL
         }
         
-        NSPersistentStoreCoordinator.replaceStore(at: storeURL,
-                                                  withStoreAt: currentURL)
+        try NSPersistentStoreCoordinator.replaceStore(at: storeURL,
+                                                      withStoreAt: currentURL)
         
         if (currentURL != storeURL) {
-            NSPersistentStoreCoordinator.destroyStore(at: currentURL)
+            try NSPersistentStoreCoordinator.destroyStore(at: currentURL)
         }
     }
     
     private func migrationStepsForStore(at storeURL: URL,
-                                        toVersion destinationVersion: CoreDataMigrationVersion) -> [CoreDataMigrationStep] {
-        guard let metadata = NSPersistentStoreCoordinator.metadata(at: storeURL),
-                let sourceVersion = CoreDataMigrationVersion.compatibleVersionForStoreMetadata(metadata) else {
-            fatalError("Unknown store version at URL \(storeURL)")
-        }
+                                        toVersion destinationVersion: CoreDataMigrationVersion)  throws -> [CoreDataMigrationStep] {
+        let metadata = try NSPersistentStoreCoordinator.metadata(at: storeURL)
+        let sourceVersion = try CoreDataMigrationVersion.compatibleVersionForStoreMetadata(metadata)
         
-        return migrationSteps(fromSourceVersion: sourceVersion,
-                              toDestinationVersion: destinationVersion)
+        return try migrationSteps(fromSourceVersion: sourceVersion,
+                                  toDestinationVersion: destinationVersion)
     }
 
     private func migrationSteps(fromSourceVersion sourceVersion: CoreDataMigrationVersion,
-                                toDestinationVersion destinationVersion: CoreDataMigrationVersion) -> [CoreDataMigrationStep] {
+                                toDestinationVersion destinationVersion: CoreDataMigrationVersion) throws -> [CoreDataMigrationStep] {
         var sourceVersion = sourceVersion
         var migrationSteps = [CoreDataMigrationStep]()
 
         while sourceVersion != destinationVersion, let nextVersion = sourceVersion.nextVersion() {
-            let migrationStep = CoreDataMigrationStep(sourceVersion: sourceVersion,
-                                                      destinationVersion: nextVersion)
+            let migrationStep = try CoreDataMigrationStep(sourceVersion: sourceVersion,
+                                                          destinationVersion: nextVersion)
             migrationSteps.append(migrationStep)
 
             sourceVersion = nextVersion
@@ -100,21 +99,21 @@ class CoreDataMigrator: CoreDataMigrating {
     
     // MARK: - WAL
 
-    func forceWALCheckpointingForStore(at storeURL: URL) {
-        guard let metadata = NSPersistentStoreCoordinator.metadata(at: storeURL),
-                let currentModel = NSManagedObjectModel.compatibleModelForStoreMetadata(metadata) else {
-            return
+    func forceWALCheckpointingForStore(at storeURL: URL) throws {
+        let metadata = try NSPersistentStoreCoordinator.metadata(at: storeURL)
+        guard let currentModel = NSManagedObjectModel.compatibleModelForStoreMetadata(metadata) else {
+            throw CoreDataMigrationError.walCheckpointingMissingCompatibleModel
         }
         
         do {
             let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: currentModel)
             
             let options = [NSSQLitePragmasOption: ["journal_mode": "DELETE"]]
-            let store = persistentStoreCoordinator.addPersistentStore(at: storeURL,
-                                                                      options: options)
+            let store = try persistentStoreCoordinator.addPersistentStore(at: storeURL,
+                                                                          options: options)
             try persistentStoreCoordinator.remove(store)
         } catch let error {
-            fatalError("Failed to force WAL checkpointing, error: \(error)")
+            throw CoreDataMigrationError.walCheckpointingFailed(error)
         }
     }
 }
@@ -123,12 +122,18 @@ private extension CoreDataMigrationVersion {
     
     // MARK: - Compatible
     
-    static func compatibleVersionForStoreMetadata(_ metadata: [String : Any]) -> CoreDataMigrationVersion? {
+    static func compatibleVersionForStoreMetadata(_ metadata: [String : Any]) throws -> CoreDataMigrationVersion {
         let compatibleVersion = CoreDataMigrationVersion.allCases.first {
-            let model = NSManagedObjectModel.managedObjectModel(forResource: $0.rawValue)
+            guard let model = try? NSManagedObjectModel.managedObjectModel(forResource: $0.rawValue) else {
+                return false
+            }
             
             return model.isConfiguration(withName: nil,
                                          compatibleWithStoreMetadata: metadata)
+        }
+        
+        guard let compatibleVersion = compatibleVersion else {
+            throw CoreDataMigrationError.versionUnknown
         }
         
         return compatibleVersion

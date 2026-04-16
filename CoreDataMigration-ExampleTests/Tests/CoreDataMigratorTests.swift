@@ -42,16 +42,16 @@ class CoreDataMigratorTests: XCTestCase {
     
     // MARK: - SingleStepMigrations
     
-    func test_givenVersion1Store_whenMigratedToVersion2_thenStoreIsCompatibleWithVersion2() {
+    func test_givenVersion1Store_whenMigratedToVersion2_thenStoreIsCompatibleWithVersion2() throws {
         let sourceURL = FileManager.moveFileFromBundleToTempDirectory(filename: "CoreDataMigration_Example_1.sqlite")
         let toVersion = CoreDataMigrationVersion.version2
         
-        sut.migrateStore(at: sourceURL,
-                         toVersion: toVersion)
+        try sut.migrateStore(at: sourceURL,
+                             toVersion: toVersion)
         
         XCTAssertTrue(FileManager.default.fileExists(atPath: sourceURL.path))
         
-        let model = NSManagedObjectModel.managedObjectModel(forResource: toVersion.rawValue)
+        let model = try NSManagedObjectModel.managedObjectModel(forResource: toVersion.rawValue)
         let context = NSManagedObjectContext(model: model, storeURL: sourceURL)
         let request = NSFetchRequest<NSManagedObject>.init(entityName: "Post")
         let sort = NSSortDescriptor(key: "postID", ascending: false)
@@ -76,16 +76,16 @@ class CoreDataMigratorTests: XCTestCase {
         tearDownCoreDataStack(context: context)
     }
     
-    func test_givenVersion2Store_whenMigratedToVersion3_thenStoreIsCompatibleWithVersion3() {
+    func test_givenVersion2Store_whenMigratedToVersion3_thenStoreIsCompatibleWithVersion3() throws {
         let sourceURL = FileManager.moveFileFromBundleToTempDirectory(filename: "CoreDataMigration_Example_2.sqlite")
         let toVersion = CoreDataMigrationVersion.version3
 
-        sut.migrateStore(at: sourceURL,
-                         toVersion: toVersion)
+        try sut.migrateStore(at: sourceURL,
+                             toVersion: toVersion)
 
         XCTAssertTrue(FileManager.default.fileExists(atPath: sourceURL.path))
 
-        let model = NSManagedObjectModel.managedObjectModel(forResource: toVersion.rawValue)
+        let model = try NSManagedObjectModel.managedObjectModel(forResource: toVersion.rawValue)
         let context = NSManagedObjectContext(model: model,
                                              storeURL: sourceURL)
 
@@ -131,16 +131,16 @@ class CoreDataMigratorTests: XCTestCase {
         tearDownCoreDataStack(context: context)
     }
 
-    func test_givenVersion3Store_whenMigratedToVersion4_thenStoreIsCompatibleWithVersion4() {
+    func test_givenVersion3Store_whenMigratedToVersion4_thenStoreIsCompatibleWithVersion4() throws {
         let sourceURL = FileManager.moveFileFromBundleToTempDirectory(filename: "CoreDataMigration_Example_3.sqlite")
         let toVersion = CoreDataMigrationVersion.version4
 
-        sut.migrateStore(at: sourceURL,
-                         toVersion: toVersion)
+        try sut.migrateStore(at: sourceURL,
+                             toVersion: toVersion)
 
         XCTAssertTrue(FileManager.default.fileExists(atPath: sourceURL.path))
 
-        let model = NSManagedObjectModel.managedObjectModel(forResource: toVersion.rawValue)
+        let model = try NSManagedObjectModel.managedObjectModel(forResource: toVersion.rawValue)
         let context = NSManagedObjectContext(model: model,
                                              storeURL: sourceURL)
 
@@ -199,16 +199,16 @@ class CoreDataMigratorTests: XCTestCase {
 
     // MARK: - MultipleStepMigrations
 
-    func test_givenVersion1Store_whenMigratedToVersion4_thenStoreIsCompatibleWithVersion4() {
+    func test_givenVersion1Store_whenMigratedToVersion4_thenStoreIsCompatibleWithVersion4() throws {
         let sourceURL = FileManager.moveFileFromBundleToTempDirectory(filename: "CoreDataMigration_Example_1.sqlite")
         let toVersion = CoreDataMigrationVersion.version4
 
-        sut.migrateStore(at: sourceURL,
-                         toVersion: toVersion)
+        try sut.migrateStore(at: sourceURL,
+                             toVersion: toVersion)
 
         XCTAssertTrue(FileManager.default.fileExists(atPath: sourceURL.path))
 
-        let model = NSManagedObjectModel.managedObjectModel(forResource: toVersion.rawValue)
+        let model = try NSManagedObjectModel.managedObjectModel(forResource: toVersion.rawValue)
         let context = NSManagedObjectContext(model: model,
                                              storeURL: sourceURL)
 
@@ -226,20 +226,20 @@ class CoreDataMigratorTests: XCTestCase {
 
     // MARK: - MigrationRequired
 
-    func test_givenVersion1Store_whenCheckingIfRequiresMigrationToCurrent_thenReturnsTrue() {
+    func test_givenVersion1Store_whenCheckingIfRequiresMigrationToCurrent_thenReturnsTrue() throws {
         let storeURL = FileManager.moveFileFromBundleToTempDirectory(filename: "CoreDataMigration_Example_1.sqlite")
 
-        let requiresMigration = sut.requiresMigration(at: storeURL,
-                                                      toVersion: CoreDataMigrationVersion.current)
+        let requiresMigration = try sut.requiresMigration(at: storeURL,
+                                                          toVersion: CoreDataMigrationVersion.current())
 
         XCTAssertTrue(requiresMigration)
     }
 
-    func test_givenVersion2Store_whenCheckingIfRequiresMigrationToVersion2_thenReturnsFalse() {
+    func test_givenVersion2Store_whenCheckingIfRequiresMigrationToVersion2_thenReturnsFalse() throws {
         let storeURL = FileManager.moveFileFromBundleToTempDirectory(filename: "CoreDataMigration_Example_2.sqlite")
 
-        let requiresMigration = sut.requiresMigration(at: storeURL,
-                                                      toVersion: .version2)
+        let requiresMigration = try sut.requiresMigration(at: storeURL,
+                                                          toVersion: .version2)
 
         XCTAssertFalse(requiresMigration)
     }
