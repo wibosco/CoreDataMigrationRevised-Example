@@ -29,6 +29,7 @@
 		43370DBE1F66F0DF006188EC /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43370DBB1F66F0C0006188EC /* CoreDataManager.swift */; };
 		4345D4EE1F67E0FE00027D11 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4345D4ED1F67E0FE00027D11 /* UIColor+Hex.swift */; };
 		4345D4F01F67E10700027D11 /* UIColor+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4345D4EF1F67E10700027D11 /* UIColor+Random.swift */; };
+		4361E5FE2F939F0F003F9288 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4361E5FD2F939F0F003F9288 /* SceneDelegate.swift */; };
 		43E924322F8FFB5500C932D2 /* CoreDataMigration_Example_1.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 43E9242A2F8FFB5500C932D2 /* CoreDataMigration_Example_1.sqlite */; };
 		43E924332F8FFB5500C932D2 /* CoreDataMigration_Example_3.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 43E9242C2F8FFB5500C932D2 /* CoreDataMigration_Example_3.sqlite */; };
 		43E924342F8FFB5500C932D2 /* CoreDataMigration_Example_2.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 43E9242B2F8FFB5500C932D2 /* CoreDataMigration_Example_2.sqlite */; };
@@ -82,6 +83,7 @@
 		43370DBB1F66F0C0006188EC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		4345D4ED1F67E0FE00027D11 /* UIColor+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		4345D4EF1F67E10700027D11 /* UIColor+Random.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Random.swift"; sourceTree = "<group>"; };
+		4361E5FD2F939F0F003F9288 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		43AB8AE51F66E6A5003153B3 /* CoreDataMigration-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoreDataMigration-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		43AB8AFC1F66E6A5003153B3 /* CoreDataMigration-ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CoreDataMigration-ExampleTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		43E9242A2F8FFB5500C932D2 /* CoreDataMigration_Example_1.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = CoreDataMigration_Example_1.sqlite; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 			children = (
 				43370D751F66E74A006188EC /* AppDelegate.swift */,
 				43370D761F66E74A006188EC /* Info.plist */,
+				4361E5FD2F939F0F003F9288 /* SceneDelegate.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -512,6 +515,7 @@
 				431DCEAE1F67EC9E00CF6316 /* CoreDataMigration_Example.xcdatamodeld in Sources */,
 				3DDB26C921EBF87E00388AEE /* PostWriterViewController.swift in Sources */,
 				3DACAAD221EE9D5D00309A75 /* PostSectionWriterTableViewCell.swift in Sources */,
+				4361E5FE2F939F0F003F9288 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
