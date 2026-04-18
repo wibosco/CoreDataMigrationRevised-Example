@@ -17,19 +17,16 @@ extension NSManagedObjectModel {
         let mainBundle = Bundle.main
         let subdirectory = "CoreDataMigration_Example.momd"
         
-        var omoURL: URL?
-        if #available(iOS 11, *) {
-            omoURL = mainBundle.url(forResource: resource,
+        let omoURL = mainBundle.url(forResource: resource,
                                     withExtension: "omo",
                                     subdirectory: subdirectory) // optimized model file
-        }
         
         let momURL = mainBundle.url(forResource: resource,
                                     withExtension: "mom",
                                     subdirectory: subdirectory)
         
         guard let url = omoURL ?? momURL,
-                let model = NSManagedObjectModel(contentsOf: url) else {
+              let model = NSManagedObjectModel(contentsOf: url) else {
             throw CoreDataMigrationError.unableToLoadModel
         }
         
