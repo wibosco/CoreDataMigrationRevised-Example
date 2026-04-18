@@ -14,7 +14,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     // MARK: - SceneLifecycle
 
-    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+    func scene(_ scene: UIScene,
+               willConnectTo session: UISceneSession,
+               options connectionOptions: UIScene.ConnectionOptions) {
         guard ProcessInfo.processInfo.environment["runningTests"] == nil else {
             FileManager.clearApplicationSupportDirectoryContents()
             return
@@ -40,7 +42,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // MARK: - Main
 
     func presentMainUI() {
-        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let mainStoryboard = UIStoryboard(name: "Main",
+                                          bundle: nil)
         window?.rootViewController = mainStoryboard.instantiateInitialViewController()
     }
 }
