@@ -68,7 +68,7 @@ class CoreDataManager {
             
             self.persistentContainer.loadPersistentStores { _, error in
                 guard let error = error else {
-                    completion(.success(Void()))
+                    completion(.success(()))
                     return
                 }
                 
@@ -89,7 +89,7 @@ class CoreDataManager {
                                                                    toVersion: currentVersion)
             
             guard requiresMigration else {
-                completion(.success(Void()))
+                completion(.success(()))
                 return
             }
             
@@ -116,7 +116,7 @@ class CoreDataManager {
             }
             
             DispatchQueue.main.async {
-                completion(.success(Void()))
+                completion(.success(()))
             }
         }
     }

@@ -34,7 +34,7 @@ struct CoreDataMigrationStep {
     
     private static func mappingModel(from sourceModel: NSManagedObjectModel,
                                      to destinationModel: NSManagedObjectModel) -> NSMappingModel? {
-        return customMappingModel(from: sourceModel, to: destinationModel) ?? inferredMappingModel(from:sourceModel, to: destinationModel)
+        return customMappingModel(from: sourceModel, to: destinationModel) ?? inferredMappingModel(from: sourceModel, to: destinationModel)
     }
     
     private static func inferredMappingModel(from sourceModel: NSManagedObjectModel,

@@ -67,7 +67,7 @@ class CoreDataMigrator: CoreDataMigrating {
         try NSPersistentStoreCoordinator.replaceStore(at: storeURL,
                                                       withStoreAt: currentURL)
         
-        if (currentURL != storeURL) {
+        if currentURL != storeURL {
             try NSPersistentStoreCoordinator.destroyStore(at: currentURL)
         }
     }
